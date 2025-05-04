@@ -56,9 +56,9 @@ export default function App() {
 
   return (
     <>
-      <NavBar element={<NumResults movies={movies} />} />
-      {/*<NumResults movies={movies} />
-      </NavBar> */}
+      <NavBar>
+        <NumResults movies={movies} />
+      </NavBar>
       <Main>
         <Box>
           <MovieList movies={movies} />
@@ -78,12 +78,12 @@ function Main({ children }) {
   return <main className="main">{children}</main>;
 }
 
-function NavBar({ element }) {
+function NavBar({ children }) {
   return (
     <nav className="nav-bar">
       <Logo />
       <Search />
-      {element}
+      {children}
     </nav>
   );
 }
