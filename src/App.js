@@ -50,7 +50,7 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-function NavBar() {
+function NavBar({ movies }) {
   const [query, setQuery] = useState("");
 
   return (
