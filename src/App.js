@@ -52,19 +52,19 @@ const average = (arr) =>
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
 
   return (
     <>
       <NavBar movies={movies} />
-      <Main movies={movies} watched={watched} />
+      <Main movies={movies} />
     </>
   );
 }
 
-function Main({ movies, watched }) {
+function Main({ movies }) {
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
+  const [watched, setWatched] = useState(tempWatchedData);
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
@@ -158,24 +158,42 @@ function Main({ movies, watched }) {
 }
 
 function NavBar({ movies }) {
+  return (
+    <nav className="nav-bar">
+      <Logo />
+      <Search />
+      <NumResults movies={movies} />
+    </nav>
+  );
+}
+
+function Logo() {
+  return (
+    <div className="logo">
+      <span role="img">🍿</span>
+      <h1>usePopcorn</h1>
+    </div>
+  );
+}
+
+function Search() {
   const [query, setQuery] = useState("");
 
   return (
-    <nav className="nav-bar">
-      <div className="logo">
-        <span role="img">🍿</span>
-        <h1>usePopcorn</h1>
-      </div>
-      <input
-        className="search"
-        type="text"
-        placeholder="Search movies..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <p className="num-results">
-        Found <strong>{movies.length}</strong> results
-      </p>
-    </nav>
+    <input
+      className="search"
+      type="text"
+      placeholder="Search movies..."
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+    />
+  );
+}
+
+function NumResults({ movies }) {
+  return (
+    <p className="num-results">
+      Found <strong>{movies.length}</strong> results
+    </p>
   );
 }
