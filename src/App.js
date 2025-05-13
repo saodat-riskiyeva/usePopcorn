@@ -77,8 +77,6 @@ export default function App() {
 
         setMovies(data.Search);
       } catch (err) {
-        console.error(err.message);
-
         setError(err.message);
       } finally {
         setIsLoading(false);
