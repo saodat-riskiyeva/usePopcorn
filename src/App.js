@@ -99,7 +99,11 @@ export default function App() {
 
           setMovies(data.Search);
         } catch (err) {
-          setError(err.message);
+          console.log(err.message);
+
+          if (err.name !== "AbortError") {
+            setError(err.message);
+          }
         } finally {
           setIsLoading(false);
         }
